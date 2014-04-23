@@ -1,0 +1,17 @@
+{
+  "name": "ABot3",
+  "version": "0.0.3",
+  "description": "A simple IRC bot.",
+  "main": "ABot3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "arya-s",
+  "license": "ISC",
+  "dependencies": {
+    "escape-html": "^1.0.1",
+    "irc": "^0.3.6",
+    "moment": "^2.6.0",
+    "mongodb": "^1.4.2"
+  }
+}
