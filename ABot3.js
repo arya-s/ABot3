@@ -17,6 +17,7 @@ function init(loadedObj){
 
 function initIRC(){
     console.log('Starting IRC.');
+    var btcexchange = config.standardbtcexchange;
     var uptime = moment();
     var cmds = preloaded[0];
     var db = preloaded[1];
@@ -43,7 +44,8 @@ function initIRC(){
         message: '',
         client: client,
         db: db,
-        uptime: uptime
+        uptime: uptime,
+        btcexchange: btcexchange
         };
 
         var operator = text.charAt(0);
