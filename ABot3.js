@@ -2,6 +2,7 @@ var moment = require('moment');
 var initCheck = 0;
 var preloaded = []; /* Holds commands, database, twitter in that order */
 var config = require('./config.js');
+var checkNotes = require('./cmd/fetch/notes.js');
 
 require('./lib/loadCommands.js')(init);
 require('./lib/db.js')(init);
@@ -48,8 +49,10 @@ function initIRC(){
         btcexchange: btcexchange
         };
 
-        var operator = text.charAt(0);
+        //Check notes autmatically
+        checkNotes(bundle);
 
+        var operator = text.charAt(0);
         if(operator == config.fetchoperator || operator == config.executeoperator){
             var splitted = text.split(' ');
             var cmd = splitted.splice(0, 1)[0].substring(1);
