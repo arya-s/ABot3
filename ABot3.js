@@ -38,6 +38,12 @@ function initIRC(){
 
     console.log('Responses: ',db.responses);
 
+    client.addListener('nick', function(nick, to, text, message){
+        if(nick == 'Arya'){
+            client.send('nick', 'Arya');
+        }
+    });
+
     client.addListener('message', function(nick, to, text, message){
         var bundle = {
             nick: nick,
@@ -50,6 +56,7 @@ function initIRC(){
         uptime: uptime,
         btcexchange: btcexchange
         };
+        console.log('Bundle: ', bundle);
 
         //Check notes autmatically
         checkNotes(bundle);
