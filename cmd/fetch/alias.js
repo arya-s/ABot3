@@ -1,4 +1,5 @@
 var config = require('../../config.js');
+var util = require('../../lib/util.js');
 
 module.exports = function(irc){
     if(irc.message.length > 0){
