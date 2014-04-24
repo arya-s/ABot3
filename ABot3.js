@@ -1,3 +1,4 @@
+var moment = require('moment');
 var initCheck = 0;
 var preloaded = []; /* Holds commands, database, twitter in that order */
 var config = require('./config.js');
@@ -16,6 +17,7 @@ function init(loadedObj){
 
 function initIRC(){
     console.log('Starting IRC.');
+    var uptime = moment();
     var cmds = preloaded[0];
     var db = preloaded[1];
     var irc = require('irc');
@@ -40,7 +42,8 @@ function initIRC(){
         rawmessage: message,
         message: '',
         client: client,
-        db: db
+        db: db,
+        uptime: uptime
         };
 
         var operator = text.charAt(0);
