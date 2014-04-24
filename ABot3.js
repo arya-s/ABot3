@@ -26,11 +26,11 @@ function initIRC(){
     var db = preloaded[1];
     var irc = require('irc');
     var client = new irc.Client(
-            'irc.quakenet.org',
-            'abot3',
+            config.irc.server,
+            config.irc.botname,
             {
-                channels: ['#babodebug'],
-        debug: true,
+                channels: config.irc.channels,
+        debug: config.irc.debug,
         floodProtection: true,
         floodProtectionDelay: 1000
             }
