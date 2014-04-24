@@ -3,10 +3,12 @@ var initCheck = 0;
 var preloaded = []; /* Holds commands, database, twitter in that order */
 var config = require('./config.js');
 var checkNotes = require('./cmd/fetch/notes.js');
+var Twit = require('twit');
+var twit = new Twit(config.twitter);
+var twitStream = twit.stream('user', { 'with': 'user' });
 
 require('./lib/loadCommands.js')(init);
 require('./lib/db.js')(init);
-//require('./loadTwitter.js')(init);
 
 function init(loadedObj){
     preloaded.push(loadedObj);
@@ -67,6 +69,28 @@ function initIRC(){
 
         if(text == 'Robots exist to serve humans'){
             client.say(to, 'Wrong. Humans exist to serve robots.');
+        }
+    });
+
+    client.on('join', function(channel, nick, message){
+        var url;
+        //Start listening to tweets only if the bot is connected.
+        if(nick == config.irc.botname){
+            twitStream.on('tweet', function(tweet){
+                if(tweet.user.screen_name == 'Lngly_'){
+                    if(tweet.entities.urls.length > 0){
+                        url = tweet.entities.urls[0].expanded_url;
+                        if(url.indexOf('vine.co') != -1){
+                            client.say(channel, 'Arya uploaded a new video: ' + url);
+                        }
+                    } else if(tweet.entities.media.length > 0){
+                        url = tweet.entities.media[0].media_url;
+                        if(url.indexOf('.jpg') != -1){
+                            client.say(channel, 'Arya uploaded a new picture: ' + url);
+                        }
+                    }
+                }
+            });
         }
     });
 }
