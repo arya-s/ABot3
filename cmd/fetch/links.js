@@ -12,10 +12,10 @@ module.exports = function(irc){
                 }
             });
 
-            irc.client.say(irc.to, 'More at: http://secret-taiga-6562.herokuapp.com/');
+            irc.client.say(irc.to, 'More at: http://abot3.herokuapp.com/'); 
         } else {
             console.log('Error fetching links.', err);
-            irc.client.say(irc.to, 'Couldn\'t fetch any links. Check the damn website yourself: http://secret-taiga-6562.herokuapp.com/');
+            irc.client.say(irc.to, 'Couldn\'t fetch any links. Check the damn website yourself: http://abot3.herokuapp.com/');
         }
     });
 };
