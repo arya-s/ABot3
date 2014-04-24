@@ -3,8 +3,8 @@ var initCheck = 0;
 var preloaded = []; /* Holds commands, database, twitter in that order */
 var config = require('./config.js');
 
-require('./loadCommands.js')(init);
-require('./db.js')(init);
+require('./lib/loadCommands.js')(init);
+require('./lib/db.js')(init);
 //require('./loadTwitter.js')(init);
 
 function init(loadedObj){

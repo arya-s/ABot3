@@ -1,4 +1,4 @@
-var util = require('../../util.js');
+var util = require('../../lib/util.js');
 var config = require('../../config.js');
 
 module.exports = function(irc){
