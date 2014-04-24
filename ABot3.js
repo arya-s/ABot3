@@ -50,7 +50,6 @@ function initIRC(){
             var cmd = splitted.splice(0, 1)[0].substring(1);
             var msg = splitted.join(' ');
             bundle.message = msg;
-            console.log('Sending bundle: ',bundle);
 
             //Execute commands if we have a match
             if(cmds[operator].hasOwnProperty(cmd)){

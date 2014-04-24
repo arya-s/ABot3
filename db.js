@@ -45,3 +45,14 @@ Database.prototype.addLink = function(link, desc, sender, cb){
         cb(err);
     });
 };
+
+Database.prototype.getUser = function(user, cb){
+    this.db.collection('users').find({ name: user }).toArray(function(err, data){
+        cb(err, data);
+    });
+};
+
+Database.prototype.updateUser = function(user, alias){
+    this.db.collection('users').update({ name: user}, { '$addToSet': { aliases: alias } }, { w: 0 });
+};
+
