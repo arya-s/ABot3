@@ -69,7 +69,6 @@ function initIRC(){
         uptime: uptime,
         btcexchange: btcexchange
         };
-        console.log('Bundle: ', bundle);
 
         //Check notes autmatically
         checkNotes(bundle);
