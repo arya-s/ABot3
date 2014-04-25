@@ -6,6 +6,8 @@ var checkNotes = require('./cmd/fetch/notes.js');
 var Twit = require('twit');
 var twit = new Twit(config.twitter);
 var twitStream = twit.stream('user', { 'with': 'user' });
+var ObjectID = require('mongodb').ObjectID;
+var botNameID = ObjectID('53597eda1ba435599e000016');
 
 require('./lib/loadCommands.js')(init);
 require('./lib/db.js')(init);
@@ -27,7 +29,7 @@ function initIRC(){
     var irc = require('irc');
     var client = new irc.Client(
             'irc.quakenet.org',
-            'abot3',
+            db.botName,
             {
                 channels: ['#babodebug'],
         debug: true,
@@ -39,8 +41,12 @@ function initIRC(){
     console.log('Responses: ',db.responses);
 
     client.addListener('nick', function(nick, to, text, message){
-        if(nick == 'Arya'){
+        //Make sure to not accidentally trigger a self rename
+        //Discard if the bot changed his name from Arya after !ohayou was sent
+        if(message.nick == 'Arya' && message.user != '~nodebot'){
             client.send('nick', 'Arya');
+            //And update the db with it in case the bot restarts
+            db.setBotName(botNameID, 'Arya');
         }
     });
 
