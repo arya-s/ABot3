@@ -17,6 +17,11 @@ exports.twitter = {
 };
 exports.twitterHandle = '<twitter username>';
 
+//Youtube config
+exports.youtube = {
+    key: '<youtube simple key>'
+}
+
 //MISC
 exports.fetchoperator = '?';
 exports.executeoperator = '!';
