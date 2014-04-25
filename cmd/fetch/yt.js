@@ -5,7 +5,7 @@ var youtube = require('youtube-node');
 youtube.setKey(config.youtube.key);
 
 module.exports = function(irc){
-    var id = getYoutubeId(irc.message);
+    var id = getYoutubeID(irc.message);
     if(id){
         youtube.getById(id, function(result){
             if(result){
