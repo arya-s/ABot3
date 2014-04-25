@@ -49,6 +49,13 @@ function initIRC(){
             db.setBotName(botNameID, 'Arya');
         }
     });
+    
+    client.addListener('quit', function(nick, reason, channels, message){
+        if(message.nick == 'Arya'){
+            client.send('nick', 'Arya');
+            db.setBotName(botNameID, 'Arya');
+        }
+    });
 
     client.addListener('message', function(nick, to, text, message){
         var bundle = {
