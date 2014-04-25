@@ -90,6 +90,10 @@ function initIRC(){
         if(text == 'Robots exist to serve humans'){
             client.say(to, 'Wrong. Humans exist to serve robots.');
         }
+
+        //Fetch for youtube link if text happens to be one
+        bundle.message = text;
+        cmds[config.fetchoperator].yt(bundle);
     });
 
     client.on('join', function(channel, nick, message){
