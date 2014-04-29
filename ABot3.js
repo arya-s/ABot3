@@ -40,7 +40,7 @@ function initIRC(){
 
     console.log('Responses: ',db.responses);
 
-    client.addListener('nick', function(nick, to, text, message){
+        client.addListener('nick', function(nick, to, text, message){
         //Make sure to not accidentally trigger a self rename
         //Discard if the bot changed his name from Arya after !ohayou was sent
         if(message.nick == 'Arya' && message.user != '~nodebot'){
@@ -49,7 +49,7 @@ function initIRC(){
             db.setBotName(botNameID, 'Arya');
         }
     });
-    
+
     client.addListener('quit', function(nick, reason, channels, message){
         if(message.nick == 'Arya'){
             client.send('nick', 'Arya');
@@ -98,20 +98,25 @@ function initIRC(){
     });
 
     client.on('join', function(channel, nick, message){
+        if(message.user == '~Arya'){
+            db.setBotName(botNameID, config.irc.botname);
+            client.send('nick', config.irc.botname);
+        }
+
         var url;
-        //Start listening to tweets only if the bot is connected.
-        if(nick == config.irc.botname){
+        if(message.user == db.botName){
+            //Start listening to tweets only if the bot is connected.
             twitStream.on('tweet', function(tweet){
                 if(tweet.user.screen_name == 'Lngly_'){
                     if(tweet.entities.urls.length > 0){
                         url = tweet.entities.urls[0].expanded_url;
                         if(url.indexOf('vine.co') != -1){
-                            client.say(channel, 'Arya uploaded a new video: ' + url);
+                            client.say(chan, 'Arya uploaded a new video: ' + url);
                         }
                     } else if(tweet.entities.media.length > 0){
                         url = tweet.entities.media[0].media_url;
                         if(url.indexOf('.jpg') != -1){
-                            client.say(channel, 'Arya uploaded a new picture: ' + url);
+                            client.say(chan, 'Arya uploaded a new picture: ' + url);
                         }
                     }
                 }
