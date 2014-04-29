@@ -103,11 +103,10 @@ function initIRC(){
             client.send('nick', config.irc.botname);
         }
 
-        var url;
         db.getBotName(function(err, data){
             if(!err){
                 var curBotName = data[0].curBotName;
-                if(message.user == curBotName){
+                if(nick == curBotName){
                     //Start listening to tweets only if the bot is connected.
                     twitStream.on('tweet', function(tweet){
                         if(tweet.user.screen_name == 'Lngly_'){
