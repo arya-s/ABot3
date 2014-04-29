@@ -113,12 +113,12 @@ function initIRC(){
                             if(tweet.entities.urls.length > 0){
                                 url = tweet.entities.urls[0].expanded_url;
                                 if(url.indexOf('vine.co') != -1){
-                                    client.say(chan, 'Arya uploaded a new video: ' + url);
+                                    client.say(channel, 'Arya uploaded a new video: ' + url);
                                 }
                             } else if(tweet.entities.media.length > 0){
                                 url = tweet.entities.media[0].media_url;
                                 if(url.indexOf('.jpg') != -1){
-                                    client.say(chan, 'Arya uploaded a new picture: ' + url);
+                                    client.say(channel, 'Arya uploaded a new picture: ' + url);
                                 }
                             }
                         }
