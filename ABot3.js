@@ -89,7 +89,7 @@ function initIRC(){
                     if(isOwner){
                         cmds[operator][cmd].cmd(bundle);
                     } else {
-                        client.say(to, 'You ain\'t tellin me no nothim, son.');
+                        client.say(to, 'You ain\'t tellin me no nothin, son.');
                     }
                 } else if(cmds[operator][cmd].rights == 4){
                     cmds[operator][cmd].cmd(bundle);
