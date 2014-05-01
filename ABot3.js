@@ -17,6 +17,7 @@ function init(loadedObj){
     console.log('Preloaded:',preloaded);
     if(preloaded.length == 2){
         initIRC();
+        console.log(preloaded[0]['!'].ohayou);
     }
 }
 
@@ -80,9 +81,19 @@ function initIRC(){
             var msg = splitted.join(' ');
             bundle.message = msg;
 
+            var isOwner = message.host.split('.')[0] == config.owner;
+
             //Execute commands if we have a match
             if(cmds[operator].hasOwnProperty(cmd)){
-                cmds[operator][cmd](bundle);
+                if(cmds[operator][cmd].rights == 7){
+                    if(isOwner){
+                        cmds[operator][cmd].cmd(bundle);
+                    } else {
+                        client.say(to, 'You ain\'t tellin me no nothim, son.');
+                    }
+                } else if(cmds[operator][cmd].rights == 4){
+                    cmds[operator][cmd].cmd(bundle);
+                }
             }
         }
 
@@ -98,7 +109,7 @@ function initIRC(){
     });
 
     client.on('join', function(channel, nick, message){
-        if(message.user == '~Arya'){
+        if(message.host.split('.')[0] == config.owner){
             db.setBotName(botNameID, config.irc.botname);
             client.send('nick', config.irc.botname);
         }
