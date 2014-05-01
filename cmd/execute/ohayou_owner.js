@@ -6,3 +6,5 @@ module.exports = function(irc){
     irc.db.setBotName(botNameID, config.irc.botname);
     irc.client.send('nick', config.irc.botname);
 };
+
+exports.rights = 7;
