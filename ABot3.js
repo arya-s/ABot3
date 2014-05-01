@@ -17,7 +17,6 @@ function init(loadedObj){
     console.log('Preloaded:',preloaded);
     if(preloaded.length == 2){
         initIRC();
-        console.log(preloaded[0]['!'].ohayou);
     }
 }
 
