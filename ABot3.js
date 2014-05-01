@@ -104,7 +104,7 @@ function initIRC(){
         //Fetch for youtube link if text happens to be one
         if(text.indexOf('youtu') != -1){
             bundle.message = text;
-            cmds[config.fetchoperator].yt(bundle);
+            cmds[config.fetchoperator].yt.cmd(bundle);
         }
     });
 
