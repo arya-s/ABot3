@@ -94,17 +94,19 @@ function initIRC(){
                     cmds[operator][cmd].cmd(bundle);
                 }
             }
+        } else {
+            //Fetch for youtube link if text happens to be one
+            if(text.indexOf('youtu') != -1){
+                bundle.message = text;
+                cmds[config.fetchoperator].yt.cmd(bundle);
+            }
         }
+
 
         if(text == 'Robots exist to serve humans'){
             client.say(to, 'Wrong. Humans exist to serve robots.');
         }
 
-        //Fetch for youtube link if text happens to be one
-        if(text.indexOf('youtu') != -1){
-            bundle.message = text;
-            cmds[config.fetchoperator].yt.cmd(bundle);
-        }
     });
 
     client.on('join', function(channel, nick, message){
