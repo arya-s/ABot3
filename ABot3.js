@@ -115,28 +115,24 @@ function initIRC(){
             client.send('nick', config.irc.botname);
         }
 
-        db.getBotName(function(err, data){
-            if(!err){
-                var curBotName = data[0].curBotName;
-                if(nick == curBotName){
-                    //Start listening to tweets only if the bot is connected.
-                    twitStream.on('tweet', function(tweet){
-                        if(tweet.user.screen_name == 'Lngly_'){
-                            if(tweet.entities.urls.length > 0){
-                                url = tweet.entities.urls[0].expanded_url;
-                                if(url.indexOf('vine.co') != -1){
-                                    client.say(channel, 'Arya uploaded a new video: ' + url);
-                                }
-                            } else if(tweet.entities.media.length > 0){
-                                url = tweet.entities.media[0].media_url;
-                                if(url.indexOf('.jpg') != -1){
-                                    client.say(channel, 'Arya uploaded a new picture: ' + url);
-                                }
-                            }
+        if(message.user.indexOf("~nodebot") != -1){
+            //Start listening to tweets only if the bot is connected.
+            twitStream.on('tweet', function(tweet){
+                if(tweet.user.screen_name == 'Lngly_'){
+                    if(tweet.entities.urls.length > 0){
+                        url = tweet.entities.urls[0].expanded_url;
+                        if(url.indexOf('vine.co') != -1){
+                            client.say(channel, 'Arya uploaded a new video: ' + url);
                         }
-                    });
+                    } else if(tweet.entities.media.length > 0){
+                        url = tweet.entities.media[0].media_url;
+                        if(url.indexOf('.jpg') != -1){
+                            client.say(channel, 'Arya uploaded a new picture: ' + url);
+                        }
+                    }
                 }
-            }
-        });
-    });
+            });
+        }
+    }
+});
 }
