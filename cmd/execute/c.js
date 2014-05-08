@@ -1,11 +1,12 @@
 var config = require('../../config.js');
 var fx = require('money');
+var util = require('../../lib/util.js');
 
 module.exports = function(irc){
     var splitted = irc.message.split(' ');
 
     if(splitted.length >= 3){
-        var amount = splitted[0];
+        var amount = util.parseNumber(splitted[0]);
         var fromCurrency = splitted[1].toUpperCase();
         var toCurrency = splitted[2].toUpperCase();
 
