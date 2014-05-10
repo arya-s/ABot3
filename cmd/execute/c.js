@@ -22,7 +22,7 @@ module.exports = function(irc){
             }
         });
     } else if(splitted.length == 1){
-        var temperature = splitted[0].substring(0, temperature.length-1);
+        var temperature = splitted[0].substring(0, splitted[0].length-1);
         var deg = splitted[0].charAt(substring[0]-1);
 
         if(deg == 'F'){
