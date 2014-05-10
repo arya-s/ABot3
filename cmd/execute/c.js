@@ -23,7 +23,7 @@ module.exports = function(irc){
         });
     } else if(splitted.length == 1){
         var temperature = splitted[0].substring(0, splitted[0].length-1);
-        var deg = splitted[0].charAt(splitted[0]-1);
+        var deg = splitted[0].charAt(splitted[0].length-1);
 
         if(deg == 'F'){
             irc.client.say(irc.to, irc.nick + ': ' + splitted[0] + ' = ' + util.toCelsius(temperature) + 'C');
