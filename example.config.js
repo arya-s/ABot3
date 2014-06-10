@@ -3,7 +3,7 @@ exports.db = 'mongodb://<user>:<password>@<host>:<port>/<appname>';
 
 //IRC config
 exports.irc = {
-    botname: 'bot',
+    botname: 'boti',
     channels: ['#channelname'],
     debug: false
 };
