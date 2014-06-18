@@ -78,7 +78,7 @@ function initIRC(){
             var splitted = text.split(' ');
             var cmd = splitted.splice(0, 1)[0].substring(1);
             var msg = splitted.join(' ');
-            bundle.message = msg;
+            bundle.message = msg.toLowerCase();
 
             var isOwner = message.host.split('.')[0] == config.owner;
 
