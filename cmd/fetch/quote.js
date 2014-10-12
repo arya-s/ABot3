@@ -5,6 +5,8 @@ module.exports = function(irc){
 
     if(!isNaN(quoteId)){
         //Fetch quote by id
+        console.log('Fetching quote with id: '+quoteId);
+
         irc.db.getQuoteWithId(quoteId, function(err, data){
             if(!err){
                 if(data.length > 0){
@@ -16,14 +18,20 @@ module.exports = function(irc){
         });
     } else {
         //Fetch a random quote
+        console.log('Fetch id was: ' + quoteId + '. Therefore fetching random quote');
+
         irc.db.getQuoteCount(function(err, stats){
             if(!err){
                 var quoteCount = stats.count;
                 var randomId = util.rnd(1, quoteCount);
 
+                console.log('Random quote id: ' + randomId);
+
                 irc.db.getQuoteWithId(randomId, function(err, data){
                     if(!err){
                         if(data.length > 0){
+                            console.log(data);
+
                             irc.client.say(irc.to, 'Quote #' + randomId + ': ' + data[0].quote);
                         }
                     } else {
