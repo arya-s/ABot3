@@ -3,12 +3,14 @@ var util = require('../../lib/util.js');
 module.exports = function(irc){
     var quoteId = util.trim(irc.message);
 
-    if(!isNaN(quoteId)){
+    if(quoteId.length > 0){
         //Fetch quote by id
         console.log('Fetching quote with id: '+quoteId);
 
         irc.db.getQuoteWithId(quoteId, function(err, data){
             if(!err){
+                console.log(data);
+
                 if(data.length > 0){
                     irc.client.say(irc.to, 'Quote #' + quoteId + ': ' + data[0].quote);
                 }
