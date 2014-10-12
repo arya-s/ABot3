@@ -6,6 +6,9 @@ module.exports = function(irc){
     if(quoteId.length > 0){
         //Fetch quote by id
         console.log('Fetching quote with id: '+quoteId);
+        if(isNaN(quoteId){
+            console.log('Id is NaN');
+        }
 
         irc.db.getQuoteWithId(quoteId, function(err, data){
             if(!err){
