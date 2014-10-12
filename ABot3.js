@@ -96,9 +96,21 @@ function initIRC(){
             }
         } else if(operator === '.'){
             bundle.db.addNewQuote('Test quote');
-            console.log(bundle.db.getQuoteCount());
+            bundle.db.getQuoteCount(function(err, data){
+                if(err){
+                    console.warn(err.message);
+                } else {
+                    console.log(data);
+                }
+            });
             bundle.db.addNewQuote('Test quote2');
-            console.log(bundle.db.getQuoteCount());
+            bundle.db.getQuoteCount(function(err, data){
+                if(err){
+                    console.warn(err.message);
+                } else {
+                    console.log(data);
+                }
+            });
         } else {
             //Fetch for youtube link if text happens to be one
             if(text.indexOf('youtu') != -1){
