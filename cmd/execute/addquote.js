@@ -5,9 +5,10 @@ module.exports = function(irc){
     console.log(quote.length);
 
     if(quote.length > 0){
-        irc.db.addNewQuote(quote, function(err, id){
+        irc.db.addNewQuote(quote, function(err, quoteId){
            if(!err){
-               irc.client.say(irc.to, 'Added your shitty quote as quote #', id);
+               console.log(quoteId);
+               irc.client.say(irc.to, 'Added your shitty quote as quote #', quoteId);
            } else {
                irc.client.say(irc.to, 'Something went wrong, try again later, or don\'t, I don\'t care.');
            }
