@@ -7,10 +7,10 @@ module.exports = function(irc){
         //Fetch quote by id
         irc.db.getQuoteWithId(parseInt(quoteId), function(err, data){
             if(!err){
-                console.log(data);
-
                 if(data.length > 0){
                     irc.client.say(irc.to, 'Quote #' + quoteId + ': ' + data[0].quote);
+                } else {
+                    irc.client.say(irc.to, 'There is no quote for that id.');
                 }
             } else {
                 console.warn(err.message);
@@ -39,5 +39,4 @@ module.exports = function(irc){
             }
         });
     }
-
 };
