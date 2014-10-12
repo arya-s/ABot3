@@ -96,9 +96,9 @@ function initIRC(){
             }
         } else if(operator === '.'){
             bundle.db.addNewQuote('Test quote');
-            console.log(bundle.db.getCurrentIdCountFor('quotes'));
+            console.log(bundle.db.getQuoteCount());
             bundle.db.addNewQuote('Test quote2');
-            console.log(bundle.db.getCurrentIdCountFor('quotes'));
+            console.log(bundle.db.getQuoteCount());
         } else {
             //Fetch for youtube link if text happens to be one
             if(text.indexOf('youtu') != -1){
