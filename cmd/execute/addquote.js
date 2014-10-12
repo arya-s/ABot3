@@ -13,6 +13,6 @@ module.exports = function(irc){
            }
         });
     } else {
-        irc.client.say('Very funny. Don\'t add empty quotes.');
+        irc.client.say(irc.to, 'Very funny. Don\'t add empty quotes.');
     }
 };
