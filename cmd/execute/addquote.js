@@ -7,9 +7,9 @@ module.exports = function(irc){
         var quoteId = irc.db.addNewQuote(quote);
 
         if(quoteId !== -1){
-            irc.client.say('Added your shitty quote as quote #', quoteId);
+            irc.client.say(irc.to, 'Added your shitty quote as quote #', quoteId);
         } else {
-            irc.client.say('Something went wrong, try again later, or don\'t, I don\'t care.');
+            irc.client.say(irc.to, 'Something went wrong, try again later, or don\'t, I don\'t care.');
         }
     } else {
         irc.client.say('Very funny. Don\'t add empty quotes.');
