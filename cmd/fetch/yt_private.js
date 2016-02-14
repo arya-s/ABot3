@@ -1,7 +1,9 @@
 var util = require('../../lib/util.js');
 var config = require('../../config.js');
 var getYoutubeID = require('get-youtube-id');
-var youtube = require('youtube-node');
+var YouTube = require('youtube-node');
+var youtube = new YouTube();
+
 youtube.setKey(config.youtube.key);
 
 module.exports = function(irc){
