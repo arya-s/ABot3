@@ -93,7 +93,9 @@ function initIRC()  {
                 bundle.message = text;
                 cmds[config.fetchoperator].yt.cmd(bundle);
 
-            } else if (message.user.indexOf("~nodebot") === -1 && util.isUrl(text)) {
+            }
+
+            if (message.user.indexOf("~nodebot") === -1 && util.isUrl(text)) {
 
                 var url = util.getUrl(text);
 

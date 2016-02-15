@@ -7,10 +7,15 @@ var youtube = new YouTube();
 youtube.setKey(config.youtube.key);
 
 module.exports = function(irc){
+
     var id = getYoutubeID(irc.message);
-    if(id){
-        youtube.getById(id, function(result){
-            if(result){
+
+    if (id) {
+
+        youtube.getById(id, function(err, result) {
+
+            if (result) {
+
                 var videoTitle = result.items[0].snippet.title;
                 var durationString = util.convertTime(result.items[0].contentDetails.duration);
                 var channelTitle = result.items[0].snippet.channelTitle;
@@ -19,7 +24,11 @@ module.exports = function(irc){
                 var viewCount = result.items[0].statistics.viewCount;
 
                 irc.client.say(irc.to, '[Y] ' + videoTitle + ' (' + durationString + ') by ' + channelTitle + ' [+' + likes + '/-' + dislikes + ', ' + viewCount + ' views]'); 
+
             }
+
         });
+
     }
+
 };
