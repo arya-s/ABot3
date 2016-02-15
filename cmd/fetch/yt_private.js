@@ -23,7 +23,12 @@ module.exports = function(irc){
                 var dislikes = result.items[0].statistics.dislikeCount;
                 var viewCount = result.items[0].statistics.viewCount;
 
-                irc.client.say(irc.to, '[Y] ' + videoTitle + ' (' + durationString + ') by ' + channelTitle + ' [+' + likes + '/-' + dislikes + ', ' + viewCount + ' views]'); 
+                if (typeof(likes) !== 'undefined' && typeof(dislikes) !== 'undefined') {
+                    irc.client.say(irc.to, '[Y] ' + videoTitle + ' (' + durationString + ') by ' + channelTitle + ' [+' + likes + '/-' + dislikes + ', ' + viewCount + ' views]'); 
+                } else {
+                    irc.client.say(irc.to, '[Y] ' + videoTitle + ' (' + durationString + ') by ' + channelTitle + ' [' + viewCount + ' views]'); 
+                }
+
 
             }
 
