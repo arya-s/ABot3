@@ -41,7 +41,7 @@ module.exports = function(irc){
 
         }
 
-        irc.client.say(irc.ot, 'Saved your reminder.');
+        irc.client.say(irc.to, 'Saved your reminder.');
 
         global.setTimeout(function () {
 
