@@ -44,7 +44,7 @@ module.exports = function(irc){
         global.setTimeout(function () {
 
             irc.client.say(irc.to, reminder.sender + ': ' + reminder.message);
-            irc.client.say(irc.to, 'Set ' + reminder.sentAt.fromNow() + '.');
+            irc.client.say(irc.to, 'Set ' + now.fromNow() + '.');
 
             irc.db.removeReminder(reminder);
 
