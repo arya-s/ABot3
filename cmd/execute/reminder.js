@@ -29,8 +29,11 @@ module.exports = function(irc){
         sender: irc.nick,
         sentAt: now.toDate(),
         dueAt: now.add(duration).toDate(),
+        ago: time,
         messsage: message
     };
+
+    console.log(reminder);
 
     irc.db.addReminder(reminder, function (error) {
 
@@ -46,7 +49,7 @@ module.exports = function(irc){
         global.setTimeout(function () {
 
             irc.client.say(irc.to, reminder.sender + ': ' + reminder.message);
-            irc.client.say(irc.to, 'Set ' + now.fromNow() + '.');
+            irc.client.say(irc.to, 'Set ' + reminder.ago + ' ago.'); 
 
             irc.db.removeReminder(reminder);
 
