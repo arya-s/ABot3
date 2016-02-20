@@ -17,7 +17,7 @@ module.exports = function(irc){
     var message  = splitted.join(' '); 
     var duration = getDuration(time);
 
-    if (!moment.isMoment(duration)) {
+    if (typeof duration === 'undefined') {
 
         irc.client.say(irc.to, 'Error parsing ' + time + '.');
         return;
