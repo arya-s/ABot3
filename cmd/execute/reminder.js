@@ -19,7 +19,7 @@ module.exports = function(irc){
 
     if (!moment.isMoment(duration)) {
 
-        irc.client.say(to, 'Error parsing ' + time + '.');
+        irc.client.say(irc.to, 'Error parsing ' + time + '.');
         return;
 
     }
