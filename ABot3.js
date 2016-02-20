@@ -1,15 +1,16 @@
-var moment     = require('moment');
-var util       = require('./lib/util.js');
-var handleLink = require('./lib/handleLink.js'); 
-var initCheck  = 0;
-var preloaded  = []; /* Holds commands, database, twitter in that order */
-var config     = require('./config.js');
-var checkNotes = require('./cmd/fetch/notes.js');
-var Twit       = require('twit');
-var twit       = new Twit(config.twitter);
-var twitStream = twit.stream('user', { 'with': 'user' });
-var ObjectID   = require('mongodb').ObjectID;
-var botNameID  = ObjectID('53597eda1ba435599e000016');
+var moment          = require('moment');
+var util            = require('./lib/util.js');
+var handleLink      = require('./lib/handleLink.js'); 
+var setupReminders  = require('./lib/setupReminders.js');
+var initCheck       = 0;
+var preloaded       = []; /* Holds commands, database, twitter in that order */
+var config          = require('./config.js');
+var checkNotes      = require('./cmd/fetch/notes.js');
+var Twit            = require('twit');
+var twit            = new Twit(config.twitter);
+var twitStream      = twit.stream('user', { 'with': 'user' });
+var ObjectID        = require('mongodb').ObjectID;
+var botNameID       = ObjectID('53597eda1ba435599e000016');
 
 require('./lib/loadCommands.js')(init);
 require('./lib/db.js')(init);
@@ -115,10 +116,11 @@ function initIRC()  {
 
     client.on('join', function(channel, nick, message) {
 
-        if (message.user.indexOf("~nodebot") !== -1) {
+        if (client.nick === nick) {
+            
+            setupReminders({to: channel, client: client, db: db});
 
             var url;
-
             //Start listening to tweets only if the bot is connected.
             twitStream.on('tweet', function(tweet){
 

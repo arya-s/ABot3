@@ -33,8 +33,6 @@ module.exports = function(irc){
         message: message
     };
 
-    console.log(reminder);
-
     irc.db.addReminder(reminder, function (error) {
 
         if (error) {
