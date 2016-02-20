@@ -5,7 +5,7 @@ module.exports = function(irc){
 
     var splitted = irc.message.split(' ');
 
-    if (split.length < 2) {
+    if (splitted.length < 2) {
 
         irc.client.say(irc.to, 'Command usage: ' + config.executeoperator + 'reminder <(d+)d(d+)h(d+)m(d+)s> <message>. e.g. ' + config.executeoperator + 'reminder 4m20s tea is ready');
         irc.client.say(irc.to, 'Reminds you of a <message> after <(d+)d(d+)h(d+)m(d+)s> from now.');
@@ -45,7 +45,7 @@ module.exports = function(irc){
 
             irc.client.say(irc.to, reminder.sender + ': ' + reminder.message);
             irc.client.say(irc.to, 'Set ' + reminder.sentAt.fromNow() + '.');
-            
+
             irc.db.removeReminder(reminder);
 
         }, duration.as('milliseconds'));
