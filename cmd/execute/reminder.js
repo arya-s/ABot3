@@ -27,8 +27,8 @@ module.exports = function(irc){
     var now      = moment();
     var reminder = {
         sender: irc.nick,
-        sentAt: now,
-        dueAt: now.add(duration),
+        sentAt: now.toDate(),
+        dueAt: now.add(duration).toDate(),
         messsage: message
     };
 
