@@ -1,5 +1,6 @@
 var moment = require('moment');
 var config = require('../../config.js');
+var UPTIME_MAX_DAYS = 1;
 
 
 module.exports = function(irc){
@@ -45,14 +46,20 @@ module.exports = function(irc){
 
         irc.client.say(irc.to, 'Saved your reminder.');
 
-        global.setTimeout(function () {
+        // Uptime is never larger than a day
+        // We don't need to keep timeout track for dates that are more than two days into the future
+        if (moment(reminder.dueAt).diff(now, 'days') <= (UPTIME_MAX_DAYS + 1)) { 
 
-            irc.client.say(irc.to, reminder.sender + ': ' + reminder.message);
-            irc.client.say(irc.to, 'Set ' + reminder.ago + ' ago.'); 
+            global.setTimeout(function () {
 
-            irc.db.removeReminder(reminder);
+                irc.client.say(irc.to, reminder.sender + ': ' + reminder.message);
+                irc.client.say(irc.to, 'Set ' + reminder.ago + ' ago.'); 
 
-        }, duration.as('milliseconds'));
+                irc.db.removeReminder(reminder);
+
+            }, duration.as('milliseconds'));
+
+        }
 
     });
 
